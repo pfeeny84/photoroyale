@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Thread
+from .models import Thread, Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 
 # Create your views here.
 
@@ -14,11 +14,37 @@ def about(request):
 
 class ThreadCreate(CreateView):
   model = Thread
-  fields = '__all__'
+  fields = ['title', 'description']
   
-#   def form_valid(self, form):
-#     form.instance.user = self.request.user
-#     return super().form_valid(form)
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class ThreadDelete(DeleteView):
+    model = Thread
+    success_url = '/'
+
+def threads_index(request):
+    threads = Thread.objects.all()
+    return render(request, 'threads/index.html', { 'threads': threads })
+
+def thread_posts_index(request, thread_id):
+    posts = Post.objects.filter(thread=thread_id)
+    thread = Thread.objects.get(id=thread_id)
+    return render(request, 'threads/posts/index.html', { 'posts': posts, 'thread':thread})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def signup(request):
   error_message = ''
@@ -35,7 +61,3 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-
-def threads_index(request):
-    threads = Thread.objects.filter(user=request.user)
-    return render(request, 'threads/index.html', { 'threads': threads })
