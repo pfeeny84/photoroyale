@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1> {{ thread.title }} </h1>
+
+{% if user == thread.user %}
+    <a href="{% url 'thread_delete' thread.id %}">Delete ???</a>
+{% endif %}
+
+{% for post in posts %}
+
+<div class="card">
+    <div class="card-content">
+        <p> This is a post </p>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

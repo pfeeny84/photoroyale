@@ -3,4 +3,16 @@
 
 <h1>Threads</h1>
 
+{% for thread in threads %}
+
+<div class="card">
+    <div class="card-content">
+        <a href="{% url 'thread_posts_index' thread.id %}"> {{ thread.title }} </a>
+        <span class="card-title"> {{ thread.title }} </span>
+        <p>Description: {{ thread.description }} </p>
+    </div>
+</div>
+
+{% endfor %}
+
 {% endblock %}
