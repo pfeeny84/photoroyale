@@ -25,6 +25,14 @@ class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'post_id': self.id})
+
+    
+
 class PostImage(Image):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
