@@ -3,9 +3,13 @@
 
 <h1>THIS IS A POST DETAIL</h1>
 
+<<<<<<< HEAD
 <img src="{{ url }}" alt="">
 
 <a class='btn' href="{% url 'post_delete' post.id %}">Delete ???</a>
+=======
+<a class='btn' href="{% url 'post_delete' post.thread.id post.id %}">Delete ???</a>
+>>>>>>> 62d2a7b85313788c11aed196282b915ca0cf08c5
 <a class='btn' href="{% url 'post_update' post.id %}">Edit ???</a>
 <a class='btn' href="{% url 'comment_create' post.id %}">Comment !!!!!</a>
 
@@ -15,7 +19,14 @@
     <div class="card-content">
         <span class="card-title"> {{ comment.user }} </span>
         <p>Comment: {{ comment.content }} </p>
+<<<<<<< HEAD
         <p></p>
+=======
+        {% if user == comment.user %}
+        <a class='btn' href="{% url 'comment_delete' comment.id %}">Delete !!!!!</a>
+        <a class='btn' href="{% url 'comment_update' comment.id %}">Update !!!!!</a>
+        {% endif %}
+>>>>>>> 62d2a7b85313788c11aed196282b915ca0cf08c5
     </div>
 </div>
 {% endfor %}
