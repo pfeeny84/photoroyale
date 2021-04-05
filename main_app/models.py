@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation, ContentType, GenericForeignKey
 
 # Models
 
 class Image(models.Model):
     url = models.CharField(max_length=200)
-    
-class ProfileImage(Image):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content_type = models.ForeignKey(ContentType, related_name='content_type_images', on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
 class Thread(models.Model):
     title = models.CharField(max_length=50)
@@ -18,23 +19,12 @@ class Thread(models.Model):
     def get_absolute_url(self):
         return reverse('thread_posts_index', kwargs={'thread_id': self.id})
 
-class ThreadImage(Image):
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'post_id': self.id})
-
-    
-
-class PostImage(Image):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class Comment(models.Model):
     content = models.CharField(max_length=200)

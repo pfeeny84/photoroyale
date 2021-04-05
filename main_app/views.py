@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Thread, Post, Comment
+from .models import Thread, Post, Comment, Image
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -44,7 +45,17 @@ def threads_index(request):
 def thread_posts_index(request, thread_id):
     posts = Post.objects.filter(thread=thread_id)
     thread = Thread.objects.get(id=thread_id)
-    return render(request, 'threads/posts/index.html', {'posts': posts, 'thread': thread})
+
+    contenttype_obj = ContentType.objects.get_for_model(thread)
+    image = Image.objects.filter(object_id=thread.id, content_type=contenttype_obj).first().url
+
+    fullposts = []
+    for post in posts:
+      contenttype_obj_post = ContentType.objects.get_for_model(posts.first())
+      post_image = Image.objects.filter(object_id=posts.first().id, content_type=contenttype_obj_post).first().url
+      fullposts.append({'post': post, 'image': post_image})
+
+    return render(request, 'threads/posts/index.html', {'posts': fullposts, 'thread': thread, 'url': image,})
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
@@ -74,7 +85,11 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = Comment.objects.filter(post=post_id)
-    return render(request, 'threads/posts/detail.html', {'post': post, 'comments': comments})
+
+    contenttype_obj = ContentType.objects.get_for_model(post)
+    image = Image.objects.filter(object_id=post.id, content_type=contenttype_obj).first().url
+
+    return render(request, 'threads/posts/detail.html', {'post': post, 'comments': comments, 'url': image})
 
 
 def signup(request):
