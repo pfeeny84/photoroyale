@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Thread, Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 # Create your views here.
 
@@ -20,9 +20,16 @@ class ThreadCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+
+  
+
 class ThreadDelete(DeleteView):
     model = Thread
     success_url = '/'
+
+class ThreadUpdate(UpdateView):
+  model = Thread
+  fields = ['description']
 
 def threads_index(request):
     threads = Thread.objects.all()
@@ -34,13 +41,26 @@ def thread_posts_index(request, thread_id):
     return render(request, 'threads/posts/index.html', { 'posts': posts, 'thread':thread})
 
 
+class PostCreate(CreateView):
+  model = Post
+  fields = []
 
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    form.instance.thread = Thread.objects.get(thread_id)
+    return super().form_valid(form)
 
+class PostDelete(DeleteView):
+  model = Post
+  success_url = '/threads/'
 
+class PostUpdate(UpdateView):
+  model = Post
+  fields = []
 
-
-
-
+def post_detail(request, post_id):
+  post = Post.objects.get(id=post_id)
+  return render(request, 'threads/posts/detail.html', { 'post': post})
 
 
 
