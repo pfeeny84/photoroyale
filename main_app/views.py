@@ -3,6 +3,8 @@ from .models import Thread, Post, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -15,7 +17,7 @@ def about(request):
     return render(request, 'about.html')
 
 
-class ThreadCreate(CreateView):
+class ThreadCreate(LoginRequiredMixin, CreateView):
     model = Thread
     fields = ['title', 'description']
 
@@ -24,12 +26,12 @@ class ThreadCreate(CreateView):
         return super().form_valid(form)
 
 
-class ThreadDelete(DeleteView):
+class ThreadDelete(LoginRequiredMixin, DeleteView):
     model = Thread
     success_url = '/'
 
 
-class ThreadUpdate(UpdateView):
+class ThreadUpdate(LoginRequiredMixin, UpdateView):
     model = Thread
     fields = ['description']
 
@@ -45,7 +47,7 @@ def thread_posts_index(request, thread_id):
     return render(request, 'threads/posts/index.html', {'posts': posts, 'thread': thread})
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     fields = []
 
@@ -56,15 +58,14 @@ class PostCreate(CreateView):
         return super().form_valid(form)
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/threads/'
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     fields = []
-
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -89,7 +90,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-class CommentCreate(CreateView):
+class CommentCreate(LoginRequiredMixin, CreateView):
   model = Comment
   fields = ['content']
 
@@ -99,12 +100,12 @@ class CommentCreate(CreateView):
     return super().form_valid(form)
 
 
-class CommentDelete(DeleteView):
+class CommentDelete(LoginRequiredMixin, DeleteView):
   model = Comment
   success_url = '/threads/'
 
 
-class CommentUpdate(UpdateView):
+class CommentUpdate(LoginRequiredMixin, UpdateView):
   model = Comment
   fields = ['content']
 
