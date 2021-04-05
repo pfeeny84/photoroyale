@@ -60,6 +60,10 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
+
+    def get_object(self, queryset = None):
+        thread = self.kwargs['thread_id']
+        print(thread)
     success_url = '/threads/'
 
 
