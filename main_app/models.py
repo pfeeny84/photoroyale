@@ -40,3 +40,6 @@ class Comment(models.Model):
     content = models.CharField(max_length=200)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'post_id': self.post.id})
