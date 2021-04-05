@@ -47,7 +47,8 @@ class PostCreate(CreateView):
 
   def form_valid(self, form):
     form.instance.user = self.request.user
-    form.instance.thread = Thread.objects.get(thread_id)
+    print(self.kwargs['thread_id'], 'this is self.kwargs')
+    form.instance.thread = Thread.objects.get(id=self.kwargs['thread_id'])
     return super().form_valid(form)
 
 class PostDelete(DeleteView):
