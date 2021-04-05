@@ -13,6 +13,9 @@
     <div class="card-content">
         <span class="card-title"> {{ comment.user }} </span>
         <p>Comment: {{ comment.content }} </p>
+        <a class='btn' href="{% url 'comment_delete' comment.id %}">Delete !!!!!</a>
+        <a class='btn' href="{% url 'comment_update' comment.id %}">Update !!!!!</a>
+        
     </div>
 </div>
 
