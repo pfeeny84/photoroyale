@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Bangers&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
           <li><a class="nav" href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
           <li><a class="nav" href="{% url 'logout' %}">Log Out?</a></li>
-          <li><a class="nav" href="{% url 'thread_create' %}">Create a Thread!</a></li>
+          <li><a class="nav" href="{% url 'thread_render' %}">Create a Thread!</a></li>
           <li class="nav">{{user.username}}</li>
           {% else %}
           <li><a class="nav" href="{% url 'signup' %}">Sign Up?</a></li>
