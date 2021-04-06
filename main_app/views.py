@@ -6,7 +6,14 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import ThreadForm
 
+import uuid
+import boto3
+
+
+S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+BUCKET = 'catcollector187'
 # Create your views here.
 
 
@@ -18,15 +25,33 @@ def about(request):
     return render(request, 'about.html')
 
 
-class ThreadCreate(LoginRequiredMixin, CreateView):
-    model = Thread
-    fields = ['title', 'description']
+# class ThreadCreate(LoginRequiredMixin, CreateView):
+#     model = Thread
+#     fields = ['title', 'description']
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        print(self.request.FILES)
-        add_photo(self.request.get('image', None), )
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         add_photo(self.request.FILES.get('image', None), 12, ContentType.objects.get_for_model(Thread.objects.first()))
+#         return super().form_valid(form)
+
+def thread_render(request):
+    return render(request, 'threads/thread_form.html')
+
+def ThreadCreate(request):
+    # create the ModelForm using the data in request.POST
+    form = ThreadForm(request.POST)
+    # validate the form
+    if form.is_valid():
+        # don't save the form to the db until it
+        # has the cat_id assigned
+        new_thread = form.save(commit=False)
+        new_thread.user = request.user
+        new_thread.save()
+
+        add_photo(request.FILES.get('image', None), new_thread.id, ContentType.objects.get_for_model(new_thread))
+        print("This is the thread", new_thread)
+
+    return redirect('/threads/')
 
 def add_photo(photo_file, object_id, object_type):
     if photo_file:
@@ -39,7 +64,7 @@ def add_photo(photo_file, object_id, object_type):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            Image.objects.create(content_type=object_type, object_id=object_id)
+            Image.objects.create(url=url, content_type=object_type, object_id=object_id)
         except:
             return False
     return True
