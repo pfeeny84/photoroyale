@@ -47,15 +47,15 @@ def thread_posts_index(request, thread_id):
     thread = Thread.objects.get(id=thread_id)
 
     contenttype_obj = ContentType.objects.get_for_model(thread)
-    image = Image.objects.filter(object_id=thread.id, content_type=contenttype_obj).first().url
+    image = Image.objects.filter(object_id=thread.id, content_type=contenttype_obj).first()
 
     fullposts = []
     for post in posts:
       contenttype_obj_post = ContentType.objects.get_for_model(posts.first())
-      post_image = Image.objects.filter(object_id=posts.first().id, content_type=contenttype_obj_post).first().url
+      post_image = Image.objects.filter(object_id=posts.first().id, content_type=contenttype_obj_post).first()
       fullposts.append({'post': post, 'image': post_image})
 
-    return render(request, 'threads/posts/index.html', {'posts': fullposts, 'thread': thread, 'url': image,})
+    return render(request, 'threads/posts/index.html', {'posts': fullposts, 'thread': thread, 'image': image,})
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
@@ -72,9 +72,10 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
 
-    def get_object(self, queryset = None):
-        thread = self.kwargs['thread_id']
-        print(thread)
+    # def get_object(self, queryset = None):
+    #     thread = self.kwargs['thread_id']
+    #     print(thread)
+    
     success_url = '/threads/'
 
 
@@ -87,9 +88,9 @@ def post_detail(request, post_id):
     comments = Comment.objects.filter(post=post_id)
 
     contenttype_obj = ContentType.objects.get_for_model(post)
-    image = Image.objects.filter(object_id=post.id, content_type=contenttype_obj).first().url
+    image = Image.objects.filter(object_id=post.id, content_type=contenttype_obj).first()
 
-    return render(request, 'threads/posts/detail.html', {'post': post, 'comments': comments, 'url': image})
+    return render(request, 'threads/posts/detail.html', {'post': post, 'comments': comments, 'image': image})
 
 
 def signup(request):
