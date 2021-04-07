@@ -6,6 +6,7 @@
 {% if image %}
 <img src="{{ image.url }}" alt="">
 {% endif %}
+<p>Post Description: {{ post.description }} </p>
 
 <a class='btn' href="{% url 'post_delete' post.id %}">Delete ???</a>
 <a class='btn' href="{% url 'post_update' post.id %}">Edit ???</a>
