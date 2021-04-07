@@ -69,10 +69,6 @@ main {
   width: 300px;
 }
 
-#threadbutton {
-  color:rgb(253, 197, 0);
-}
-
-#postbutton {
+input[type="text"]{
   color:rgb(253, 197, 0);
 }
