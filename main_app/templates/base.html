@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Photo Royale</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
@@ -36,13 +36,11 @@
   </header>
   <main class="container">
   </div>
-    {% block content %}
-    {% endblock %}
-  </main>
-  <div id="footer">
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2021 Photo Royale &nbsp;</div>
-  </footer>
-</div>
+  {% block content %}
+  {% endblock %}
+</main>
+<footer class="page-footer">
+  <div class="right">All Rights Reserved, &copy; 2021 Photo Royale &nbsp;</div>
+</footer>
 </body>
 </html>
