@@ -19,6 +19,7 @@
     <div class="card-content">
         <span class="card-title"> {{ comment.user }} </span>
         <p>Comment: {{ comment.content }} </p>
+        <p>{{ comment.created_at }}</p>
         {% if user == comment.user %}
         <a class='btn' href="{% url 'comment_delete' comment.id %}">Delete !!!!!</a>
         <a class='btn' href="{% url 'comment_update' comment.id %}">Update !!!!!</a>
