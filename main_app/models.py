@@ -15,6 +15,7 @@ class Thread(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('thread_posts_index', kwargs={'thread_id': self.id})
@@ -23,6 +24,7 @@ class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'post_id': self.id})
@@ -31,6 +33,7 @@ class Comment(models.Model):
     content = models.CharField(max_length=200)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'post_id': self.post.id})
