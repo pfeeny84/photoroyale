@@ -1,3 +1,13 @@
+
+:root {
+  --card_width: 250px;
+  --row_increment: 10px;
+  --card_border_radius: 16px;
+  --card_small: 26;
+  --card_med: 33;
+  --card_large: 45;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -61,8 +71,10 @@ main {
   font-family: 'Bebas Neue', cursive;
   text-align: left;
   box-shadow: 3px 7px #E0CA00;
-  border-radius: 3px;
-  /* grid-template-rows: auto; */
+  padding: 30px;
+  margin: 15px 10px;
+  border-radius: var(--card_border_radius);
+  grid-template-rows: auto;
 }
 
 .image{
@@ -71,4 +83,33 @@ main {
 
 input[type="text"]{
   color:rgb(253, 197, 0);
+}
+
+.thread-image{
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 3px 5px rgba(26, 25, 25, 0.459);
+}
+
+.thread-container {
+  margin: 0;
+  padding: 0;
+  width: 80vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card_width));
+  grid-auto-rows: var(--row_increment);
+  background-color: rgb(25, 25, 26);
+}
+
+.card-small {
+  grid-row-end: span var(--card_small);
+}
+.card-medium {
+  grid-row-end: span var(--card_medium);
+}
+.card-large {
+  grid-row-end: span var(--card_large);
 }

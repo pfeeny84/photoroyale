@@ -2,16 +2,14 @@
 {% block content %}
 
 <h1>Threads</h1>
+<div class="thread-container">
 {% for thread in threads %}
-
-<div class="card">
-    <div class="card-content">
-        <a href="{% url 'thread_posts_index' thread.thread.id %}"> <img src="{{ thread.image.url }}" alt=""> </a>
-        <span class="card-title"> {{ thread.thread.title }} </span>
-        <p>Created By: {{ thread.thread.user }}</p>
+    <div class="card card-large">
+            <a href="{% url 'thread_posts_index' thread.thread.id %}"> <img class="thread-image" src="{{ thread.image.url }}" alt=""> </a>
+            <span class="card-title"> {{ thread.thread.title }} </span>
+            <p>Created By: {{ thread.thread.user }}</p>
     </div>
+    {% endfor %}
 </div>
-
-{% endfor %}
 
 {% endblock %}
