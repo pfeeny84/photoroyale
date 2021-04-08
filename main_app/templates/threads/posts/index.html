@@ -5,7 +5,7 @@
 {% if image %}
 <img src="{{ image.url }}" alt="There should be an image here" style="width:300px;">
 {% endif %}
-<p>Thread Description: {{ thread.description }} </p>
+<p> {{ thread.description }} </p>
 <p>Created By: {{ thread.user }} on {{ thread.created_at }}</p>
 
 {% if user == thread.user %}
@@ -19,7 +19,7 @@
     <div class="card-content">
         {% if post.image %}
         <a href="{% url 'post_detail' post.post.id %}"><img src="{{ post.image.url }}" style="width:100px;"></a>
-        <p>Post Description: {{ post.post.description }} </p>
+        <p> {{ post.post.description }} </p>
         <p>Created By: {{ post.post.user }} on {{ post.post.created_at }}</p>
         {% else %}
         <a href="{% url 'post_detail' post.post.id %}">Post with no image</a>
