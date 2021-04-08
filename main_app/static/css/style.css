@@ -127,3 +127,8 @@ input[type="text"]{
   background-color: rgb(26, 25, 25);
 }
 
+form {
+  justify-content: center;
+  margin: 33.33% auto;
+}
+
