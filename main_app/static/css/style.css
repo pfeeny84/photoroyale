@@ -132,3 +132,21 @@ form {
   margin: 20% auto;
 }
 
+.sidenav {
+  background-color: rgb(26, 25, 25);
+}
+
+.material-icons {
+  color: black;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 24px;
+}
+
+.sidenav li > a{
+  color:rgb(253, 197, 0);
+}
+
+#sidenavuser {
+  margin-left: 25px;
+  color:rgb(253, 197, 0);
+}
