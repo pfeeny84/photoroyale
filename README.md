@@ -10,7 +10,7 @@ Photo Royale will provide a simple and easy to navigate UI that will let users u
 No more links!!!! 
 
 ![alt text](https://i.imgur.com/YYdNLqt.png)
-![alt text](https://i.imgur.com/YYdNLqt.png)
+![alt text](https://i.imgur.com/HjI0seF.jpg) [Imgur](https://i.imgur.com/bHojb3Q.png)
 ### The Team
 - Pat Feeny - https://github.com/pfeeny84
 - Michael LaSota -
