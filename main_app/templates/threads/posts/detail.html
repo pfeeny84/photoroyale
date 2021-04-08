@@ -8,8 +8,11 @@
 {% endif %}
 <p> </p>
 
+{% if user == post.user %}
 <a class='btn' href="{% url 'post_delete' post.id %}">Delete ?</a>
 <a class='btn' href="{% url 'post_update' post.id %}">Edit ?</a>
+{% endif %}
+
 <a class='btn' href="{% url 'comment_create' post.id %}">Comment</a>
 <a class='btn' href="{% url 'thread_posts_index' thread.id %}">Back</a>
 
