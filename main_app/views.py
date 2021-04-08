@@ -14,10 +14,9 @@ import uuid
 import boto3
 
 
-# S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
-# BUCKET = 'catcollector187'
-S3_BASE_URL = 'https://s3.us-west-1.amazonaws.com/' # your region
-BUCKET = 'mlasota-catcollecter' # your bucket name
+S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+BUCKET = 'catcollector187'
+
 # Create your views here.
 
 
