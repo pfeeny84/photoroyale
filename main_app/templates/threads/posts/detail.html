@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>THIS IS A POST DETAIL</h1>
+<h1>{{ post.description }}</h1>
 
 {% if image %}
 <img src="{{ image.url }}" alt="">
 {% endif %}
-<p>Post Description: {{ post.description }} </p>
+<p> </p>
 
-<a class='btn' href="{% url 'post_delete' post.id %}">Delete ???</a>
-<a class='btn' href="{% url 'post_update' post.id %}">Edit ???</a>
-<a class='btn' href="{% url 'comment_create' post.id %}">Comment !!!!!</a>
-<a class='btn' href="{% url 'thread_posts_index' thread.id %}">back</a>
+<a class='btn' href="{% url 'post_delete' post.id %}">Delete ?</a>
+<a class='btn' href="{% url 'post_update' post.id %}">Edit ?</a>
+<a class='btn' href="{% url 'comment_create' post.id %}">Comment</a>
+<a class='btn' href="{% url 'thread_posts_index' thread.id %}">Back</a>
 
 {% for comment in comments %}
 
