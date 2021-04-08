@@ -115,9 +115,13 @@ input[type="text"]{
 }
 
 .btn {
-  background-color: rgba(92, 0, 153, 0.745);
+  background-color: rgba(157, 28, 243, 0.628);
   color: rgb(255, 233, 0);
   border-radius: 5px;
-  box-shadow: 3px 3px rgb(255, 233, 0);
+  box-shadow: 1px 1px rgb(255, 233, 0);
   
+}
+
+.btn:hover {
+  background-color: rgb(26, 25, 25);
 }

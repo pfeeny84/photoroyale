@@ -23,8 +23,8 @@
         <ul class="right">
           <li><a class="nav" href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
-          <li><a class="nav" href="{% url 'logout' %}">Log Out?</a></li>
           <li><a class="nav" href="{% url 'thread_render' %}">Create a Thread!</a></li>
+          <li><a class="nav" href="{% url 'logout' %}">Log Out?</a></li>
           <li class="nav">{{user.username}}</li>
           {% else %}
           <li><a class="nav" href="{% url 'signup' %}">Sign Up?</a></li>
