@@ -113,3 +113,11 @@ input[type="text"]{
 .card-large {
   grid-row-end: span var(--card_large);
 }
+
+.btn {
+  background-color: rgba(92, 0, 153, 0.745);
+  color: rgb(255, 233, 0);
+  border-radius: 5px;
+  box-shadow: 3px 3px rgb(255, 233, 0);
+  
+}
