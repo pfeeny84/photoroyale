@@ -6,7 +6,7 @@
     {% csrf_token %}
     <table>
       <!-- Render the inputs inside of <tr>s & <td>s -->
-      {{ form.as_table }}
+      <input required placeholder="Comment" type="text" name="content" value="{{ comment.content }}">
     </table>
     <input type="submit" value="Submit!" class="btn">
   </form>
