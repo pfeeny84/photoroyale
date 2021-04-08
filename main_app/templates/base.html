@@ -17,10 +17,12 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li class="center">Lettuce begin the battle!!!!</li>
+          <li class="center hide-on-med-and-down">Lettuce begin the battle!!!!</li>
           <li><a class="title" href="/threads/" class="left brand-logo">&nbsp;&nbsp;Photo Royale</a></li>
         </ul>
-        <ul class="right">
+
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
           <li><a class="nav" href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
           <li><a class="nav" href="{% url 'thread_render' %}">Create a Thread!</a></li>
@@ -33,7 +35,19 @@
         </ul>
       </div>
     </nav>
+
   </header>
+      <ul class="sidenav" id="mobile-demo">
+      <li><a class="nav" href="{% url 'about' %}">About</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="nav" href="{% url 'thread_render' %}">Create a Thread!</a></li>
+      <li><a class="nav" href="{% url 'logout' %}">Log Out?</a></li>
+      <li class="nav">{{user.username}}</li>
+      {% else %}
+      <li><a class="nav" href="{% url 'signup' %}">Sign Up?</a></li>
+      <li><a class="nav" href="{% url 'login' %}">Log In!</a></li>
+      {% endif %}
+    </ul>
   <main class="container">
   </div>
   {% block content %}
@@ -42,5 +56,7 @@
 <footer class="page-footer">
   <div class="right">All Rights Reserved, &copy; 2021 Photo Royale &nbsp;</div>
 </footer>
+
+<script src="{% static 'js/sideBar.js' %}"></script>
 </body>
 </html>
