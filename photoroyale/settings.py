@@ -123,4 +123,4 @@ LOGIN_REDIRECT_URL = '/threads/'
 LOGOUT_REDIRECT_URL = '/'
 
 import django_on_heroku
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
