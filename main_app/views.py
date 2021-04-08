@@ -8,14 +8,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ThreadForm, PostForm
 from django.urls import reverse
-
-
+from PIL import Image as pilImage
+from io import BytesIO
 import uuid
 import boto3
 
 
-S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
-BUCKET = 'catcollector187'
+# S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+# BUCKET = 'catcollector187'
+S3_BASE_URL = 'https://s3.us-west-1.amazonaws.com/' # your region
+BUCKET = 'mlasota-catcollecter' # your bucket name
 # Create your views here.
 
 
@@ -60,12 +62,29 @@ def ThreadCreate(request):
 
 def add_photo(photo_file, object_id, object_type):
     if photo_file:
+        size = (1024, 1024)
+        im = pilImage.open(photo_file)
+        # img_width, img_height = im.size
+        # im = im.crop(((img_width - min(im.size)) // 2,
+        #               (img_height - min(im.size)) // 2,
+        #               (img_width + min(im.size)) // 2,
+        #               (img_height + min(im.size)) // 2,
+        #             ))
+        im.thumbnail(size)
+        buffer = BytesIO()
+        im.save(buffer, 'JPEG')
+        buffer.seek(0)
         s3 = boto3.client('s3')
         # need a unique "key" for S3 / needs image file extension too
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         # just in case something goes wrong
         try:
-            s3.upload_fileobj(photo_file, BUCKET, key)
+            s3.put_object(
+                Bucket=BUCKET,
+                Key=key,
+                Body=buffer,
+                ContentType='image/jpeg',
+            )
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
@@ -122,8 +141,8 @@ def post_create(request, thread_id):
         new_post.user = request.user
         new_post.thread = Thread.objects.get(id=thread_id)
         new_post.save()
-        print(request.FILES.get('image', None))
         add_photo(request.FILES.get('image', None), new_post.id, ContentType.objects.get_for_model(new_post))
+        return redirect(f'/threads/posts/{new_post.id}')
     return redirect('/threads/')
 
 class PostDelete(LoginRequiredMixin, DeleteView):
@@ -176,7 +195,8 @@ class CommentCreate(LoginRequiredMixin, CreateView):
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
   model = Comment
-  success_url = '/threads/'
+  def get_success_url(self):
+        return reverse('post_detail', kwargs={'post_id': self.object.post.id}) 
 
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
