@@ -71,7 +71,7 @@ def add_photo(photo_file, object_id, object_type):
         #             ))
         im.thumbnail(size)
         buffer = BytesIO()
-        im.save(buffer, 'JPEG')
+        im.save(buffer, 'PNG')
         buffer.seek(0)
         s3 = boto3.client('s3')
         # need a unique "key" for S3 / needs image file extension too
@@ -82,7 +82,7 @@ def add_photo(photo_file, object_id, object_type):
                 Bucket=BUCKET,
                 Key=key,
                 Body=buffer,
-                ContentType='image/jpeg',
+                ContentType='image/png',
             )
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
