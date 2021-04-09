@@ -19,11 +19,10 @@ No more links!!!!
 - Sully Mort - https://github.com/sulledy221
 - Chris Vrtis - https://github.com/Shaman187
 ### Technologies Used
-- Python, HTML, CSS
+- Python, Javascript, HTML, CSS
 - Django, Postgres
-- Javascript, Pillow.
-- Materialize
-- Heroku
+- Materialize, Pillow.
+- Heroku, AWS
 ### Getting Started
 - [Log in and Begin the Battle!](https://photo-royale.herokuapp.com/threads/)
 - [Trello Board](https://trello.com/b/AAaKFopi/photo-royal-project)
@@ -33,6 +32,6 @@ No more links!!!!
 - The ability to add animations or gifs.
 - The ability to favorite threads and posts.
 - The ability to follow other users. 
-- The ability to add multiple file types. 
+
 
 
