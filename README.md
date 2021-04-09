@@ -10,10 +10,10 @@ Photo Royale will provide a simple and easy to navigate UI that will let users u
 No more links!!!! 
 
 ![alt text](https://i.imgur.com/YYdNLqt.png)
-![alt text](https://i.imgur.com/HjI0seF.jpg) 
+![alt text](https://i.imgur.com/N3xj6Qr.png) 
 
 ### The Team
-- Pat Feeny - https://github.com/pfeeny84
+- Pat Feeny - https://github.com/pfeeny84 pfeeny84@gmail.com
 - Michael LaSota - https://github.com/StormFlame
 - Sully Mort - https://github.com/sulledy221
 - Chris Vrtis - https://github.com/Shaman187
@@ -21,16 +21,17 @@ No more links!!!!
 - Python, HTML, CSS
 - Django, Postgres
 - Javascript, Pillow.
+- Materialize
 - Heroku
 ### Getting Started
 - [Log in and Begin the Battle!](https://photo-royale.herokuapp.com/threads/)
 - [Trello Board](https://trello.com/b/AAaKFopi/photo-royal-project)
-### Additions I'd like to make
-- Add and in app photo editor
+### Additions We'd Like to Make
+- Add an in app photo editor.
 - The ability to sort threads.
 - The ability to add animations or gifs.
-- The ability to favorite threads and posts
-- The ability to follow other users 
+- The ability to favorite threads and posts.
+- The ability to follow other users. 
 - The ability to add multiple file types. 
 
 
