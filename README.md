@@ -11,12 +11,12 @@ No more links!!!!
 
 ![alt text](https://i.imgur.com/YYdNLqt.png)
 ![alt text](https://i.imgur.com/HjI0seF.jpg) 
-![alt text](https://i.imgur.com/bHojb3Q.png)
+
 ### The Team
 - Pat Feeny - https://github.com/pfeeny84
-- Michael LaSota -
-- Sully Mort - https://github.com/Shaman187
-- Chris Vrtis -
+- Michael LaSota - https://github.com/StormFlame
+- Sully Mort - https://github.com/sulledy221
+- Chris Vrtis - https://github.com/Shaman187
 ### Technologies Used
 - Python, HTML, CSS
 - Django, Postgres
